@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #faf9f5;
+  --color-paper: #ffffff;
+  --color-ink: #1f2937;
+  --color-mute: #6b7280;
+  --color-line: #e8e3d7;
+  --color-forest: #245c39;
+  --color-leaf: #4caf68;
+  --color-sage: #8daf7c;
+  --color-clay: #d97757;
+  --color-peach: #fbede3;
+  --color-mint: #eaf3ec;
+  --color-lilac: #f1edf6;
+  --color-blush: #fbeaea;
+  --color-butter: #fcf3dc;
+  --color-skyblue: #eaf2f8;
+  --color-mist: #edeff2;
+
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-script: "Caveat", "Bradley Hand", "Segoe Script", cursive;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: #d7ead9;
+    color: var(--color-forest);
+  }
+  button {
+    cursor: pointer;
+  }
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-leaf);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .tracked {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .script {
+    font-family: var(--font-script);
+  }
+  .leader {
+    background-image: radial-gradient(circle, #cfc8b8 1px, transparent 1px);
+    background-size: 6px 2px;
+    background-repeat: repeat-x;
+    background-position: 0 bottom;
+  }
+  .paper-grain {
+    background-image: radial-gradient(rgba(31, 41, 55, 0.045) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+}
+
+/* --- motion: quiet, paper-like ------------------------------------------ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.28);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes shimmer {
+  from {
+    background-position: -220px 0;
+  }
+  to {
+    background-position: 280px 0;
+  }
+}
+
+.anim-rise {
+  animation: rise 0.34s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.anim-pop {
+  animation: pop 0.32s ease-out;
+}
+.anim-lay {
+  animation: lay 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+.anim-draw {
+  stroke-dasharray: 24;
+  animation: draw 0.28s ease-out both;
+}
+.skeleton {
+  background: linear-gradient(90deg, #eeece5 0%, #f7f5ef 45%, #eeece5 90%);
+  background-size: 400px 100%;
+  animation: shimmer 1.3s linear infinite;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- printing: only the A4 sheet goes to paper ---------------------------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .sheet-frame,
+  .sheet-frame * {
+    visibility: visible;
+  }
+  [data-sheet-wrap] {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .sheet-scaler {
+    transform: none !important;
+  }
+  .sheet-frame {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d9d3c5 transparent;
+}

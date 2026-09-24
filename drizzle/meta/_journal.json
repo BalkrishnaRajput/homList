@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790221845559,
+      "tag": "0000_elite_saracen",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790229408548,
+      "tag": "0001_striped_sharon_carter",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790232694902,
+      "tag": "0002_equal_starhawk",
+      "breakpoints": true
+    }
+  ]
+}
